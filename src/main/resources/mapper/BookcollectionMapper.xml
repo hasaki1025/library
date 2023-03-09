@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.boot.library.mapper.BookcollectionMapper">
+
+    <resultMap id="BaseResultMap" type="com.boot.library.domain.Bookcollection">
+            <id property="cId" column="c_id" jdbcType="INTEGER"/>
+            <result property="uId" column="u_id" jdbcType="VARCHAR"/>
+            <result property="cName" column="c_name" jdbcType="INTEGER"/>
+            <result property="nOfCollections" column="n_of_collections" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        c_id,u_id,c_name,n_of_collections
+    </sql>
+
+    <insert id="insertOneCollection">
+        insert into bookcollection(u_id,c_name) values (#{uId},#{cName})
+    </insert>
+    <update id="updateNOfCollectionsByCId">
+        update bookcollection set n_of_collections=n_of_collections+#{count} where c_id=#{cId}
+    </update>
+
+</mapper>

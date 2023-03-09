@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.boot.library.mapper.BookOfCollectionMapper">
+
+    <resultMap id="BaseResultMap" type="com.boot.library.domain.BookOfCollection">
+            <id property="cId" column="c_id" jdbcType="INTEGER"/>
+            <id property="bId" column="b_id" jdbcType="INTEGER"/>
+
+    </resultMap>
+
+    <resultMap id="BookResultMap" type="com.boot.library.domain.Book">
+        <id property="bId" column="b_id" jdbcType="INTEGER"/>
+        <result property="bName" column="b_name" jdbcType="VARCHAR"/>
+        <result property="language" column="language" jdbcType="VARCHAR"/>
+        <result property="ISBN" column="ISBN" jdbcType="VARCHAR"/>
+        <result property="author" column="author" jdbcType="VARCHAR"/>
+        <result property="publishingHouse" column="publishing_house" jdbcType="VARCHAR"/>
+        <result property="yearOfPublication" column="Year_of_publication" jdbcType="CHAR"/>
+        <result property="description" column="description" jdbcType="VARCHAR"/>
+        <result property="hasBeenDeleted" column="has_been_deleted" jdbcType="INTEGER"/>
+        <result property="uId" column="u_id" jdbcType="VARCHAR"/>
+        <result property="uri" column="uri" jdbcType="VARCHAR"/>
+        <result property="filetype" column="filetype" jdbcType="VARCHAR"/>
+        <result property="uNickName" column="u_nick_name" jdbcType="VARCHAR"/>
+        <result property="countCollected" column="count_collected" jdbcType="INTEGER"/>
+    </resultMap>
+
+
+
+    <sql id="Base_Column_List">
+        c_id,b_id
+    </sql>
+
+
+    <sql id="Book_Column_List">
+        b_id,b_name,language,
+        ISBN,author,publishing_house,
+        Year_of_publication,description,has_been_deleted,
+        u_id,uri,filetype,u_nick_name,count_collected
+    </sql>
+    <select id="selectBookOfCollection" resultMap="BookResultMap">
+        select b.b_id,b_name,language,
+            ISBN,author,publishing_house,
+            Year_of_publication,description,has_been_deleted,
+            u_id,uri,filetype,u_nick_name,count_collected
+            from book_of_collection boc join book b on b.b_id=boc.b_id where c_id=#{cId};
+    </select>
+</mapper>

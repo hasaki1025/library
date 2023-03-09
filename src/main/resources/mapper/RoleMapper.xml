@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.boot.library.mapper.RoleMapper">
+
+    <resultMap id="BaseResultMap" type="com.boot.library.domain.Role">
+            <id property="rId" column="r_id" jdbcType="INTEGER"/>
+            <result property="rName" column="r_name" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        r_id,r_name
+    </sql>
+    <select id="selectRoleNameByRid" resultType="java.lang.String" >
+        select r_name from role where r_id=#{rId}
+    </select>
+</mapper>

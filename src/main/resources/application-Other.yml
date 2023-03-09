@@ -1,0 +1,8 @@
+
+Elasticsearch:
+  host: @Elasticsearch.Host@
+  port: 9200
+  BookIndexName: library
+
+Admin:
+  password: '123'

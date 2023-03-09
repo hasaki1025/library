@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.boot.library.mapper.BookOfCateMapper">
+
+    <resultMap id="BaseResultMap" type="com.boot.library.domain.BookOfCate">
+            <id property="cateId" column="cate_id" jdbcType="INTEGER"/>
+            <id property="bId" column="b_id" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        cate_id,b_id
+    </sql>
+    <insert id="insertById">
+        insert into book_of_cat(b_id) values (#{bId})
+    </insert>
+    <select id="getAllCateBybId" resultType="com.boot.library.domain.Category">
+        select c.cate_id,cate_name from book_of_cate boc join category c on boc.cate_id=c.cate_id where b_id=#{bId}
+    </select>
+
+</mapper>

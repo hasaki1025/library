@@ -1,0 +1,10 @@
+
+spring:
+  servlet:
+    multipart:
+      maxFileSize: 10MB
+      maxRequestSize: 20MB
+
+bookfile:
+  localPath: @book.file.localfile@
+  deletedPath: @book.file.deletefile@

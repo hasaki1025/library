@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.boot.library.mapper.UserLikeMapper">
+
+    <resultMap id="BaseResultMap" type="com.boot.library.domain.UserLike">
+            <id property="lId" column="l_id" jdbcType="INTEGER"/>
+            <result property="action" column="action" jdbcType="INTEGER"/>
+            <result property="uId" column="u_id" jdbcType="CHAR"/>
+            <result property="comId" column="com_id" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        l_id,action,u_id,
+        com_id
+    </sql>
+    <insert id="insertOne">
+        insert into user_like(action,u_id,
+                              com_id)
+        values (
+                <if test="action!=null">
+                    #{action},
+                </if>
+                <if test="uId!=null">
+                    #{uId},
+                </if>
+                <if test="comId!=null">
+                    #{comId}
+                </if>
+                )
+    </insert>
+    <update id="updateOne">
+        update user_like
+        <set>
+            <if test="action">
+                action=#{action},
+            </if>
+            <if test="uId!=null">
+                u_id=#{uId},
+            </if>
+            <if test="comId!=null">
+                com_id=#{comId}
+            </if>
+        </set>
+
+        <where>
+            <if test="lId!=null">
+                l_id=#{lId}
+            </if>
+        </where>
+
+    </update>
+</mapper>

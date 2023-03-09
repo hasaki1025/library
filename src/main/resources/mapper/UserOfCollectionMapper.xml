@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.boot.library.mapper.UserOfCollectionMapper">
+
+    <resultMap id="BaseResultMap" type="com.boot.library.domain.UserOfCollection">
+            <result property="uId" column="u_id" jdbcType="CHAR"/>
+            <result property="cId" column="c_id" jdbcType="INTEGER"/>
+    </resultMap>
+
+
+    <resultMap id="CollectionMap" type="com.boot.library.domain.Bookcollection">
+        <id property="cId" column="c_id" jdbcType="INTEGER"/>
+        <result property="uId" column="u_id" jdbcType="VARCHAR"/>
+        <result property="cName" column="c_name" jdbcType="INTEGER"/>
+        <result property="nOfCollections" column="n_of_collections" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        u_id,c_id
+    </sql>
+    <select id="selectCollectionOfUser" resultMap="CollectionMap">
+        select uc.c_id,c.u_id,c_name,n_of_collections
+        from
+            user_of_collection uc join bookcollection c on uc.c_id=c.c_id
+        where uc.u_id=#{uId}
+    </select>
+</mapper>

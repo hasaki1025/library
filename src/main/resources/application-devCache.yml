@@ -1,0 +1,35 @@
+jetcache:
+  statIntervalMinutes: 15
+  areaInCacheName: false
+  local:
+    default:
+      type: linkedhashmap
+      keyConvertor: fastjson
+      limit: 100
+  remote:
+    default:
+      type: redis
+      host: @Redis.Host@
+      port: @Redis.port@
+      keyConvertor: fastjson
+      valueEncoder: java
+      valueDecoder: java
+      poolConfig:
+        maxTotal: 50
+        minIdle: 5
+        maxIdle: 20
+      password: root
+
+    TokenCache:
+      type: redis
+      host: @Redis.Host@
+      port: @Redis.port@
+      password: root
+      keyConvertor: fastjson
+      valueEncoder: java
+      valueDecoder: java
+      poolConfig:
+        maxTotal: 50
+        minIdle: 5
+        maxIdle: 20
+

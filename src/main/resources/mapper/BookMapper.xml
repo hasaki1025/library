@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.boot.library.mapper.BookMapper">
+
+    <resultMap id="BaseResultMap" type="com.boot.library.domain.Book">
+            <id property="bId" column="b_id" jdbcType="INTEGER"/>
+            <result property="bName" column="b_name" jdbcType="VARCHAR"/>
+            <result property="language" column="language" jdbcType="VARCHAR"/>
+            <result property="ISBN" column="ISBN" jdbcType="VARCHAR"/>
+            <result property="author" column="author" jdbcType="VARCHAR"/>
+            <result property="publishingHouse" column="publishing_house" jdbcType="VARCHAR"/>
+            <result property="yearOfPublication" column="Year_of_publication" jdbcType="CHAR"/>
+            <result property="description" column="description" jdbcType="VARCHAR"/>
+            <result property="hasBeenDeleted" column="has_been_deleted" jdbcType="INTEGER"/>
+            <result property="uId" column="u_id" jdbcType="VARCHAR"/>
+            <result property="uri" column="uri" jdbcType="VARCHAR"/>
+            <result property="filetype" column="filetype" jdbcType="VARCHAR"/>
+            <result property="uNickName" column="u_nick_name" jdbcType="VARCHAR"/>
+        <result property="countCollected" column="count_collected" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        b_id,b_name,language,
+        ISBN,author,publishing_house,
+        Year_of_publication,description,has_been_deleted,
+        u_id,uri,filetype,u_nick_name,count_collected
+    </sql>
+
+
+
+    <sql id="base_book_set">
+            <if test="bId!=null">
+                b_id=#{bId} ,
+            </if>
+            <if test="bName!=null">
+                b_name=#{bName} ,
+            </if>
+            <if test="language!=null">
+                language=#{language} ,
+            </if>
+            <if test="ISBN!=null">
+                ISBN=#{ISBN} ,
+            </if>
+            <if test="author!=null">
+                author=#{author} ,
+            </if>
+            <if test="publishingHouse!=null">
+                publishing_house=#{publishingHouse} ,
+            </if>
+            <if test="yearOfPublication!=null">
+                Year_of_publication=#{yearOfPublication} ,
+            </if>
+
+            <if test="description!=null">
+                description=#{description} ,
+            </if>
+            <if test="hasBeenDeleted!=null">
+                has_been_deleted=#{hasBeenDeleted} ,
+            </if>
+            <if test="uId!=null">
+                u_id=#{uId} ,
+            </if>
+            <if test="uri!=null">
+                uri=#{uri} ,
+            </if>
+            <if test="filetype!=null">
+                filetype=#{filetype} ,
+            </if>
+            <if test="uNickName!=null">
+                u_nick_name=#{uNickName} ,
+            </if>
+        <if test="countCollected!=null">
+            count_collected=#{countCollected} ,
+        </if>
+    </sql>
+
+    <sql id="base_book_select">
+        <if test="bId!=null">
+            b_id=#{bId}
+        </if>
+        <if test="bName!=null">
+           and b_name=#{bName}
+        </if>
+        <if test="language!=null">
+            and language=#{language}
+        </if>
+        <if test="ISBN!=null">
+            and ISBN=#{ISBN}
+        </if>
+        <if test="author!=null">
+            and  author=#{author}
+        </if>
+        <if test="publishingHouse!=null">
+            and publishing_house=#{publishingHouse}
+        </if>
+        <if test="yearOfPublication!=null">
+            and Year_of_publication=#{yearOfPublication}
+        </if>
+
+        <if test="description!=null">
+            and description=#{description}
+        </if>
+        <if test="hasBeenDeleted!=null">
+            and book.has_been_deleted=#{hasBeenDeleted}
+        </if>
+        <if test="uId!=null">
+            and book.u_id=#{uId}
+        </if>
+        <if test="uri!=null">
+            and uri=#{uri}
+        </if>
+        <if test="filetype!=null">
+            and  filetype=#{filetype}
+        </if>
+        <if test="uNickName!=null">
+            and  u_nick_name=#{uNickName}
+        </if>
+        <if test="countCollected!=null">
+            and  count_collected=#{countCollected}
+        </if>
+    </sql>
+
+
+    <sql id="insert_base_book">
+            #{bId} ,
+            #{bName} ,
+            #{language} ,
+            #{ISBN} ,
+            #{author} ,
+            #{publishingHouse} ,
+            #{yearOfPublication} ,
+            #{description} ,
+            #{hasBeenDeleted} ,
+            #{uId} ,
+            #{uri} ,
+            #{filetype} ,
+            #{uNickName},#{countCollected}
+    </sql>
+    <insert id="insertOneBook">
+        insert into book(<include refid="Base_Column_List"/>)
+        values (<include refid="insert_base_book"/>)
+    </insert>
+
+    <update id="updateOneBook">
+        update book
+            <set>
+                <include refid="base_book_set"/>
+            </set>
+        <where>
+            <if test="bId!=null">
+                b_id=#{bId}
+            </if>
+            <if test="uri!=null">
+                or uri=#{uri}
+            </if>
+            <if test="ISBN!=null">
+                or ISBN=#{ISBN}
+            </if>
+        </where>
+    </update>
+    <update id="updateCountCollectedByBId">
+        update book set count_collected=count_collected+#{n} where b_id=#{bId}
+    </update>
+
+    <select id="selectBookIsExists" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from book
+        <where>
+            <if test="ISBN!=null">
+                ISBN=#{ISBN}
+            </if>
+            <if test="uri!=null">
+                or uri=#{uri}
+            </if>
+            <if test="bId!=null">
+                or b_id=#{bId}
+            </if>
+            <if test="bName!=null">
+                or b_name=#{bName}
+            </if>
+
+        </where>
+    </select>
+
+</mapper>

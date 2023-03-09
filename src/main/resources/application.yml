@@ -1,0 +1,21 @@
+spring:
+  profiles:
+    active: @profile.active@
+    group:
+      "dev": devCache,File,JWT,Mail,MP,Mysql,Other,devRedis
+      "pro": proCache,File,JWT,Mail,MP,Mysql,Other,proRedis
+      "test": testCache,File,JWT,Mail,MP,Mysql,Other,testRedis
+
+
+
+
+  devtools:
+    restart:
+      enabled: true
+  session:
+    store-type: redis
+
+server:
+  port: @http.port@
+
+
