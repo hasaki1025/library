@@ -143,13 +143,13 @@
             <properties>
                 <!--profile.active中的值就是在配置文件中actvie需要设置的名称-->
                 <profile.active>dev</profile.active>
-                <Redis.Host>192.168.10.10</Redis.Host>
-                <Mysql.Host>127.0.0.1</Mysql.Host>
-                <Redis.pwd>root</Redis.pwd>
-                <Mysql.pwd>123</Mysql.pwd>
-                <Redis.port>6379</Redis.port>
+                <Redis.Host>169.254.128.0</Redis.Host>
+                <Mysql.Host>169.254.128.0</Mysql.Host>
+                <Redis.pwd>123456</Redis.pwd>
+                <Mysql.pwd>root123</Mysql.pwd>
+                <Redis.port>7199</Redis.port>
                 <Mysql.database>library</Mysql.database>
-                <Elasticsearch.Host>192.168.10.10</Elasticsearch.Host>
+                <Elasticsearch.Host>169.254.128.0</Elasticsearch.Host>
                 <book.file.localfile>D:\\libraryBook\\</book.file.localfile>
                 <book.file.deletefile>D:\\libraryBook\\deleted\\</book.file.deletefile>
                 <http.port>80</http.port>
@@ -166,8 +166,8 @@
             <properties>
                 <!--profile.active中的值就是在配置文件中actvie需要设置的名称-->
                 <profile.active>test</profile.active>
-                <Redis.Host>43.138.191.71</Redis.Host>
-                <Mysql.Host>43.138.191.71</Mysql.Host>
+                <Redis.Host>169.254.128.0</Redis.Host>
+                <Mysql.Host>169.254.128.0</Mysql.Host>
                 <Redis.pwd>&amp;8DQxjGakJ</Redis.pwd>
                 <Mysql.pwd>8sMsXT!#5p</Mysql.pwd>
                 <Redis.port>9370</Redis.port>
@@ -175,6 +175,7 @@
                 <Elasticsearch.Host>43.138.191.71</Elasticsearch.Host>
                 <book.file.localfile>D:\\libraryBook\\</book.file.localfile>
                 <book.file.deletefile>D:\\libraryBook\\deleted\\</book.file.deletefile>
+
                 <http.port>80</http.port>
             </properties>
         </profile>
@@ -188,14 +189,14 @@
             <profile.active>pro</profile.active>
             <Redis.Host>127.0.0.1</Redis.Host>
             <Mysql.Host>127.0.0.1</Mysql.Host>
-            <Redis.pwd>&amp;8DQxjGakJ</Redis.pwd>
-            <Mysql.pwd>8sMsXT!#5p</Mysql.pwd>
-            <Redis.port>9370</Redis.port>
+            <Redis.pwd>123456</Redis.pwd>
+            <Mysql.pwd>root123</Mysql.pwd>
+            <Redis.port>7199</Redis.port>
             <Mysql.database>library</Mysql.database>
-            <Elasticsearch.Host>127.0.0.1</Elasticsearch.Host>
-            <book.file.localfile>/opt/library/</book.file.localfile>
-            <book.file.deletefile>/opt/library/deleted/</book.file.deletefile>
-            <http.port>80</http.port>
+            <Elasticsearch.Host>172.17.0.6</Elasticsearch.Host>
+            <book.file.localfile>/usr/local/library/libraryBook/</book.file.localfile>
+            <book.file.deletefile>/usr/local/library/libraryBook/deleted/</book.file.deletefile>
+            <http.port>8080</http.port>
         </properties>
 
 

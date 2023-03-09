@@ -74,22 +74,12 @@ public class JWTUtil {
         return new SecretKeySpec(encodedKey, 0, encodedKey.length, "AES");
     }
 
-    public String createJWT(String subject, String tokenid) throws JsonProcessingException {
-        JwtBuilder builder = jwtUtil.getJwtBuilder(subject, defaultTTL, tokenid);// 设置过期时间
-        return builder.compact();
-    }
-
 
     public String createJWT(String subject, Long TTL, String id) throws JsonProcessingException {
         JwtBuilder builder = jwtUtil.getJwtBuilder(subject, TTL, id);// 设置过期时间
         return builder.compact();
     }
 
-
-    public String createJWT(String subject) throws JsonProcessingException {
-        JwtBuilder builder = jwtUtil.getJwtBuilder(subject, defaultTTL, getUUID());// 设置过期时间
-        return builder.compact();
-    }
 
     public Claims parseJWT(String jwt) throws Exception {
         SecretKey secretKey = generalKey();

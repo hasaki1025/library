@@ -14,15 +14,14 @@ import com.boot.library.mapper.BookMapper;
 import com.boot.library.service.BookService;
 import com.boot.library.service.ElasticsearchService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.Resource;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
@@ -30,6 +29,7 @@ import javax.validation.Valid;
 import java.io.File;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.net.URI;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
@@ -55,6 +55,13 @@ public class BookController {
 
     @Autowired
     MailUtil mailUtil;
+
+    @Value("${bookfile.localPath}")
+    String localPath;
+
+
+    private final RestTemplate restTemplate=new RestTemplate();
+
 
 
     @GetMapping("/search")//关键字搜索图书
@@ -85,27 +92,10 @@ public class BookController {
         }
     }
 
-    @PostMapping("/download")//下载
-    ResponseEntity<Resource> download(@RequestBody Book book, HttpServletRequest request) throws UnsupportedEncodingException {
-        File file = new File(book.getUri());
-        String filename= URLEncoder.encode(file.getName().replaceAll(" ",""),"utf-8");
-        if(file.exists())
-        {
-            FileSystemResource resource = null;
-            String mimeType = request.getServletContext().getMimeType(file.getPath());
-            if (mimeType == null) {
-                mimeType = "application/octet-stream";
-            }
-            System.out.println(file.getName());
-            System.out.println(mimeType);
-            String CONTENT_DISPOSITION="attachment; filename=\""+file.getName()+"\";filename*=utf-8''"+filename;
-            ResponseEntity.BodyBuilder header = ResponseEntity.ok().
-                    header(HttpHeaders.CONTENT_TYPE, mimeType + ";charset=utf-8").
-                    header(HttpHeaders.CONTENT_DISPOSITION, CONTENT_DISPOSITION);
-            resource=new FileSystemResource(file);
-            return header.body(resource);
-        }
-        return new ResponseUtil<Resource>().addMessage("download fail",HttpStatus.BAD_REQUEST,null);
+    @GetMapping("/download")//下载
+    ResponseEntity<byte[]> download(String uri) {
+
+        return null;
     }
 
 

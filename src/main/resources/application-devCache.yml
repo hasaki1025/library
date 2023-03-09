@@ -18,13 +18,13 @@ jetcache:
         maxTotal: 50
         minIdle: 5
         maxIdle: 20
-      password: root
+      password: @Redis.pwd@
 
     TokenCache:
       type: redis
       host: @Redis.Host@
       port: @Redis.port@
-      password: root
+      password: @Redis.pwd@
       keyConvertor: fastjson
       valueEncoder: java
       valueDecoder: java

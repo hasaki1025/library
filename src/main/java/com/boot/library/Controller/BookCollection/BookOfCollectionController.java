@@ -33,9 +33,12 @@ public class BookOfCollectionController {
         return bookOfCollectionService.listBookOfCollection(cId);
     }
 
-    @PostMapping("/addBook")
-    ResponseEntity<String> addBookToCollection(@RequestBody BookOfCollection collection) {
+    @GetMapping("/addBook")
+    ResponseEntity<String> addBookToCollection(Integer bId,Integer cId) {
         try {
+            BookOfCollection collection=new BookOfCollection();
+            collection.setBId(bId);
+            collection.setCId(cId);
             bookOfCollectionService.addBookToCollection(collection,userUtil.getNowUser());
         } catch (Exception e) {
             e.printStackTrace();

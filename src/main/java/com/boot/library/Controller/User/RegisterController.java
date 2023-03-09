@@ -45,6 +45,7 @@ public class RegisterController {
         if (mailUtil.checkCode(user.getEmail(), code)) {
             if(userService.getUserByEmail(user.getEmail())==null)
             {
+                user.setRoleId(2);
                 if (userService.Register(user)) {
                     return responseUtil.addMessage("register successfully", HttpStatus.OK,null);
                 }
@@ -62,7 +63,7 @@ public class RegisterController {
 
     @PostMapping("/logoff")
     @Transactional(rollbackFor = Exception.class)
-    ResponseEntity<String> logoff(String password)
+    public ResponseEntity<String> logoff(String password)
     {
         LoginUser user = (LoginUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         String uId=user.getUser().getUId();
@@ -88,6 +89,7 @@ public class RegisterController {
             if (mailUtil.checkCode(user.getEmail(), code)) {
                 if(userService.getUserByEmail(user.getEmail())==null)
                 {
+                    user.setRoleId(1);
                     if (userService.Register(user)) {
                         return responseUtil.addMessage("register successfully", HttpStatus.OK,null);
                     }
